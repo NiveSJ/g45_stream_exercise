@@ -14,6 +14,7 @@ import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -230,7 +231,8 @@ public class StreamExercise {
         int expectedSize = 107;
         Map<String, List<Person>> personMap = null;
 
-        //todo: Write code here
+        List<Person> personList = people.stream().filter(person -> person.getLastName() != null).collect(Collectors.toList());
+        personMap = personList.stream().collect(Collectors.groupingBy(Person::getLastName));
 
         assertNotNull(personMap);
         assertEquals(expectedSize, personMap.size());
@@ -243,7 +245,7 @@ public class StreamExercise {
     public void task14() {
         LocalDate[] _2020_dates = null;
 
-        //todo: Write code here
+       // Stream.iterate()
 
 
         assertNotNull(_2020_dates);
