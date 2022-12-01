@@ -7,6 +7,7 @@ import se.lexicon.vxo.model.PersonDto;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
@@ -175,7 +176,11 @@ public class StreamExercise {
 
         Optional<String> optional = null;
 
-        //todo: Write code here
+        Function<Person, String> toString = person -> person.getDateOfBirth().format(DateTimeFormatter.
+                ofPattern("EEEE dd MMMM YYYY ")).toString().toUpperCase();
+
+
+        optional = people.stream().filter(person -> person.getPersonId() == 5914).findFirst().map(toString);
 
         assertNotNull(optional);
         assertTrue(optional.isPresent());
@@ -193,7 +198,7 @@ public class StreamExercise {
         double expected = 54.42;
         double averageAge = 0;
 
-        //todo: Write code here
+        averageAge = people.stream().mapToInt(personToAge).average().getAsDouble();
 
         assertTrue(averageAge > 0);
         assertEquals(expected, averageAge, .01);
