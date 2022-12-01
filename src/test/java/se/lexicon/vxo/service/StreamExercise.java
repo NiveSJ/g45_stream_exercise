@@ -1,5 +1,6 @@
 package se.lexicon.vxo.service;
 
+import com.sun.scenario.animation.shared.ClipEnvelope;
 import org.junit.jupiter.api.Test;
 import se.lexicon.vxo.model.Gender;
 import se.lexicon.vxo.model.Person;
@@ -213,7 +214,9 @@ public class StreamExercise {
 
         String[] result = null;
 
-        //todo: Write code here
+        result = people.stream().
+                filter(person -> person.getFirstName().equalsIgnoreCase(new StringBuilder(person.getFirstName())
+                        .reverse().toString())).map(person -> person.getFirstName()).distinct().sorted().toArray(String[]::new);
 
         assertNotNull(result);
         assertArrayEquals(expected, result);
