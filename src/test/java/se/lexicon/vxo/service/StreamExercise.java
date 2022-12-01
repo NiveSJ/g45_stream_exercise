@@ -8,6 +8,7 @@ import se.lexicon.vxo.model.PersonDto;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -150,7 +151,14 @@ public class StreamExercise {
 
         List<PersonDto> dtoList = null;
 
-       people.stream().filter(person -> person.getDateOfBirth().isBefore(LocalDate.parse("1920-01-01"))).map()
+
+        Function<Person, PersonDto> newfunction = person -> new PersonDto(person.getPersonId(), person.getFirstName().
+                concat(" ").concat(person.getLastName()));
+
+        dtoList = people.stream()
+                .filter(person -> person.getDateOfBirth().isBefore(LocalDate.parse("1920-01-01"))).
+                map(newfunction).collect(Collectors.toList());
+
 
         assertNotNull(dtoList);
         assertEquals(expectedSize, dtoList.size());
