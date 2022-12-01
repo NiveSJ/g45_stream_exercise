@@ -63,7 +63,7 @@ public class StreamExercise {
         long amount = 0;
         int expected = 90;
 
-        amount = people.stream().filter(person -> person.getLastName().equals("Andersson")).count();
+        amount = people.stream().filter(person -> person.getLastName().equalsIgnoreCase("Andersson")).count();
 
         assertEquals(expected, amount);
     }
