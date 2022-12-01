@@ -179,7 +179,7 @@ public class StreamExercise {
         Optional<String> optional = null;
 
         Function<Person, String> toString = person -> person.getDateOfBirth().format(DateTimeFormatter.
-                ofPattern("EEEE dd MMMM YYYY ")).toString().toUpperCase();
+                ofPattern("EEEE dd MMMM YYYY")).toString().toUpperCase();
 
 
         optional = people.stream().filter(person -> person.getPersonId() == 5914).findFirst().map(toString);
