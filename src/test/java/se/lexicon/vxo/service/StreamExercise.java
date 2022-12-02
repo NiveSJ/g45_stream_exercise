@@ -260,9 +260,6 @@ public class StreamExercise {
         _2020_dates = Stream.iterate(LocalDate.parse("2020-01-01"), n -> n.plusDays(1)).
                 limit(366).toArray(len -> new LocalDate[len]);
 
-        _2020_dates = Stream.iterate(LocalDate.parse("2020-01-01"), n -> n.plusDays(1)).
-                limit(366).toArray(len -> new LocalDate[len]);
-
 
         assertNotNull(_2020_dates);
         assertEquals(366, _2020_dates.length);
