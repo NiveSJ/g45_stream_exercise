@@ -39,6 +39,7 @@ public class StreamExercise {
         // integers.stream().forEach(System.out::println);  // Can be avoided as it converts Integer Object to primitive int type
 
         IntStream.rangeClosed(1, 10).forEach(System.out::println);
+        // integers.stream().forEach(integer -> System.out.println(integer));
 
 
     }
@@ -91,7 +92,8 @@ public class StreamExercise {
         int expectedSize = 8882;
         Set<LocalDate> dates = null;
 
-        dates = people.stream().map(person -> person.getDateOfBirth()).collect(Collectors.toCollection(TreeSet::new));
+        dates = people.stream().map(person -> person.getDateOfBirth())
+                .collect(Collectors.toCollection(TreeSet::new));
 
         assertNotNull(dates);
         assertTrue(dates instanceof TreeSet);
@@ -118,7 +120,8 @@ public class StreamExercise {
      */
     @Test
     public void task7() {
-        Person expected = new Person(5436, "Tea", "Håkansson", LocalDate.parse("1968-01-25"), Gender.FEMALE);
+        Person expected = new Person(5436, "Tea", "Håkansson",
+                LocalDate.parse("1968-01-25"), Gender.FEMALE);
 
         Optional<Person> optional = null;
 
@@ -211,7 +214,8 @@ public class StreamExercise {
      */
     @Test
     public void task12() {
-        String[] expected = {"Ada", "Ana", "Anna", "Ava", "Aya", "Bob", "Ebbe", "Efe", "Eje", "Elle", "Hannah", "Maram", "Natan", "Otto"};
+        String[] expected = {"Ada", "Ana", "Anna", "Ava", "Aya", "Bob", "Ebbe", "Efe", "Eje", "Elle", "Hannah", "Maram",
+                "Natan", "Otto"};
 
         String[] result = null;
 
@@ -231,11 +235,18 @@ public class StreamExercise {
         int expectedSize = 107;
         Map<String, List<Person>> personMap = null;
 
-        List<Person> personList = people.stream().filter(person -> person.getLastName() != null).collect(Collectors.toList());
-        personMap = personList.stream().collect(Collectors.groupingBy(Person::getLastName));
+        //List<Person> personList = people.stream().filter(person -> person.getLastName() != null).collect(Collectors.toList());
+
+        // personMap = personList.stream().collect(Collectors.groupingBy(Person::getLastName));
+
+        // Direct Version
+        personMap = people.stream().filter(person -> person.getLastName() != null).collect(Collectors.groupingBy(Person::getLastName));
+
 
         assertNotNull(personMap);
         assertEquals(expectedSize, personMap.size());
+
+
     }
 
     /**
@@ -245,6 +256,9 @@ public class StreamExercise {
     public void task14() {
         LocalDate[] _2020_dates = null;
 
+
+        _2020_dates = Stream.iterate(LocalDate.parse("2020-01-01"), n -> n.plusDays(1)).
+                limit(366).toArray(len -> new LocalDate[len]);
 
         _2020_dates = Stream.iterate(LocalDate.parse("2020-01-01"), n -> n.plusDays(1)).
                 limit(366).toArray(len -> new LocalDate[len]);

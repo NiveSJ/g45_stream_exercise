@@ -26,7 +26,7 @@ public class JsonReader {
 
     public List<Person> read(){
         List<Person> people = new ArrayList<>();
-        ObjectMapper objectMapper = new ObjectMapper();
+        ObjectMapper objectMapper = new ObjectMapper(); // Json Object mapper
         objectMapper.registerModule(new JavaTimeModule());
         File file = new File("resources/people.json");
         try{
